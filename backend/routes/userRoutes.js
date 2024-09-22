@@ -7,6 +7,8 @@ import {
   getCurrentUserProfile,
   updateCurrentUserProfie,
   deleteUserById,
+  getUserById,
+  updateUserById,
 } from "../controllers/userController.js";
 import { isAdmin, isAuthenticated } from "../middlewares/authMiddleware.js";
 const router = express.Router();
@@ -20,6 +22,10 @@ router
   .put(isAuthenticated, updateCurrentUserProfie);
 
 // admin routes
-router.route('/:id').delete(isAuthenticated,isAdmin,deleteUserById)
+router
+  .route("/:id")
+  .delete(isAuthenticated, isAdmin, deleteUserById)
+  .get(isAuthenticated, isAdmin, getUserById)
+  .put(isAuthenticated, isAdmin, updateUserById);
 
 export default router;

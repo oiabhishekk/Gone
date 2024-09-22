@@ -84,3 +84,42 @@ This API provides endpoints for user management, including authentication, profi
 - **Response**:
   - `200 OK` - User successfully deleted.
   - `404 Not Found` - User not found.
+
+
+## Essential User Management Routes
+
+### User Registration
+- **Method**: POST
+- **URL**: `/api/users/`
+
+### User Login
+- **Method**: POST
+- **URL**: `/api/users/auth`
+
+### User Logout
+- **Method**: POST
+- **URL**: `/api/users/logout`
+
+### Get Current User Profile
+- **Method**: GET
+- **URL**: `/api/users/profile`
+
+### Update Current User Profile
+- **Method**: PUT
+- **URL**: `/api/users/profile`
+
+### Get All Users
+- **Method**: GET
+- **URL**: `/api/users/`
+
+### Get User by ID
+- **Method**: GET
+- **URL**: `/api/users/{id}`
+
+### Update User by ID
+- **Method**: PUT
+- **URL**: `/api/users/{id}`
+
+### Delete User by ID
+- **Method**: DELETE
+- **URL**: `/api/users/{id}`
