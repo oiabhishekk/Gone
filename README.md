@@ -1,5 +1,3 @@
-## User Management API
-
 This API provides endpoints for user management, including authentication, profile management, and admin operations.
 
 ## Endpoints
@@ -34,7 +32,18 @@ This API provides endpoints for user management, including authentication, profi
 
 ---
 
-### 3. Get User by ID
+### 3. Get Current User
+
+- **Method**: GET
+- **URL**: `localhost/api/users/profile`
+- **Description**: Retrieve the profile of the currently logged-in user.
+- **Response**:
+  - `200 OK` - User profile successfully retrieved.
+  - `401 Unauthorized` - User not authenticated.
+
+---
+
+### 4. Get User Profile
 
 - **Method**: GET
 - **URL**: `localhost/api/users/:id`
@@ -47,21 +56,10 @@ This API provides endpoints for user management, including authentication, profi
 
 ---
 
-### 4. Get User Profile
-
-- **Method**: GET
-- **URL**: `localhost/api/users/profile/`
-- **Description**: Retrieve the profile of the currently logged-in user.
-- **Response**:
-  - `200 OK` - User profile successfully retrieved.
-  - `401 Unauthorized` - User not authenticated.
-
----
-
 ### 5. User Login
 
 - **Method**: POST
-- **URL**: `localhost/api/users/login`
+- **URL**: `localhost/api/users/auth`
 - **Description**: Log in a user with their credentials.
 - **Request Body**:
   ```json
