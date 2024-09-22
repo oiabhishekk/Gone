@@ -1,5 +1,8 @@
 import User from "../models/userModel.js";
 import asyncHandler from "./../middlewares/asyncHandler.js";
+import createToken from "../utils/generateToken.js";
+import bcrypt from "bcryptjs";
+import mongoose from "mongoose";
 
 const createUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
@@ -22,6 +25,7 @@ const createUser = asyncHandler(async (req, res) => {
   });
   //password is getting hashed in schema
   await newUser.save();
+  createToken(res, newUser._id);
   res.status(201).json({
     message: "User successfuly Created",
     userInfo: {
@@ -32,4 +36,106 @@ const createUser = asyncHandler(async (req, res) => {
   });
 });
 
-export { createUser };
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  const existingUser = await User.findOne({ email });
+
+  if (existingUser) {
+    const isPasswordCorrect = bcrypt.compareSync(
+      password,
+      existingUser.password
+    );
+    if (isPasswordCorrect === true) {
+      createToken(res, existingUser._id);
+      res.status(200).json({
+        message: "User successfully loggedin",
+        userInfo: {
+          _id: existingUser._id,
+          username: existingUser.username,
+          email: existingUser.email,
+        },
+      });
+      return; // exit the function after sending the response
+    } else {
+      const error = new Error("Incorrect Password");
+      error.statusCode = 401;
+      throw error;
+    }
+  }
+});
+const logoutUser = asyncHandler(async (req, res) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+  res.status(200).json({ message: "logged Out" });
+});
+const getAllUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({ isAdmin: { $ne: true } });
+
+  res.json(users);
+});
+const getCurrentUserProfile = asyncHandler(async (req, res) => {
+  const user = req.user;
+  if (user) {
+    res.json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+const updateCurrentUserProfie = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (user) {
+    user.username = req.body.username || user.username;
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      user.password = req.body.password; // The password will be hashed in the pre-save middleware
+    }
+    const updatedUser = await user.save();
+    res.json({
+      message: "User updated successfully",
+      userInfo: {
+        _id: updatedUser._id,
+        username: updatedUser.username,
+        email: updatedUser.email,
+      },
+    });
+  } else {
+    res.status(404).json({ message: "User not found" });
+  }
+});
+const deleteUserById = asyncHandler(async (req, res) => {
+  const _id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(400).json({ message: "Invalid ID format" });
+  }
+  //check if user is admin
+  const user = await User.findById(_id);
+  if (user) {
+    if (user.isAdmin) {
+      res.status(400);
+      throw new Error("Invalid User -> Cant't delete a admin");
+    }
+    await User.deleteOne({ _id });
+    res.status(200).json("User deleted Successfully");
+  } else {
+    res.status(404);
+    throw new Error("No user Found");
+  }
+});
+
+export {
+  createUser,
+  loginUser,
+  logoutUser,
+  getAllUsers,
+  getCurrentUserProfile,
+  updateCurrentUserProfie,
+  deleteUserById,
+};
