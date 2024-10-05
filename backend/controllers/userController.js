@@ -27,12 +27,9 @@ const createUser = asyncHandler(async (req, res) => {
   await newUser.save();
   createToken(res, newUser._id);
   res.status(201).json({
-    message: "User successfuly Created",
-    userInfo: {
-      _id: newUser._id,
-      username: newUser.username,
-      email: newUser.email,
-    },
+    _id: newUser._id,
+    username: newUser.username,
+    email: newUser.email,
   });
 });
 
@@ -49,12 +46,9 @@ const loginUser = asyncHandler(async (req, res) => {
     if (isPasswordCorrect === true) {
       createToken(res, existingUser._id);
       res.status(200).json({
-        message: "User successfully loggedin",
-        userInfo: {
-          _id: existingUser._id,
-          username: existingUser.username,
-          email: existingUser.email,
-        },
+        _id: existingUser._id,
+        username: existingUser.username,
+        email: existingUser.email,
       });
       return; // exit the function after sending the response
     } else {
