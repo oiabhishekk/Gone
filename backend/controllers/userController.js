@@ -49,6 +49,7 @@ const loginUser = asyncHandler(async (req, res) => {
         _id: existingUser._id,
         username: existingUser.username,
         email: existingUser.email,
+        isAdmin: existingUser.isAdmin,
       });
       return; // exit the function after sending the response
     } else {

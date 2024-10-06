@@ -6,14 +6,13 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const App = () => {
 
-  const notify = () => toast("Wow so easy !")
   return (
     <>
-    <ToastContainer/>
-    <Navigation/>
-    <main>
-      <Outlet />
-    </main>
+      <ToastContainer />
+      <Navigation />
+      <main>
+        <Outlet />
+      </main>
 
     </>
 

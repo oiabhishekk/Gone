@@ -31,7 +31,8 @@ const Login = () => {
       dispatch(setCredientials(res))
 
     } catch (error) {
-      toast.error(error?.data?.message || error.message)
+      console.log(error)
+      toast.error(error?.data?.error || error.message)
 
     }
 
