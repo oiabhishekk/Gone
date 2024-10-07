@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import {
   AiOutlineHome,
   AiOutlineShopping,
@@ -136,7 +136,7 @@ const Navigation = () => {
 
             )}
             <li>
-              <Link to="users/profile" className="block px-4 py-2 hover:bg-gray-100">Profile</Link>
+              <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">Profile</Link>
             </li>
             <li>
               <Link onClick={logoutHandler} to="/login" className="block px-4 py-2 hover:bg-gray-100">Logout</Link>
