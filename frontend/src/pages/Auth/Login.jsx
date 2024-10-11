@@ -27,11 +27,13 @@ const Login = () => {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    console.log(email, password)
     try {
       const res = await login({ email, password }).unwrap();
       dispatch(setCredentials(res));
       navigate(redirect);
     } catch (error) {
+      console.log(error)
       toast.error(error?.data?.error || error.message);
     }
   };

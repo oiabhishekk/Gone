@@ -57,6 +57,10 @@ const loginUser = asyncHandler(async (req, res) => {
       error.statusCode = 401;
       throw error;
     }
+  } else {
+    const error = new Error("Please register first using this Email.");
+    error.statusCode = 401;
+    throw error;
   }
 });
 const logoutUser = asyncHandler(async (req, res) => {

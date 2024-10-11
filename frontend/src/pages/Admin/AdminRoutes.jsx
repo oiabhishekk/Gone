@@ -4,6 +4,7 @@ import { Navigate, Outlet } from 'react-router-dom'
 
 const AdminRoutes = () => {
 
+
   const { userInfo } = useSelector((state) => state.auth);
   console.log(userInfo)
   return (

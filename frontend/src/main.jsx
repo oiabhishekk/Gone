@@ -29,6 +29,7 @@ const router = createBrowserRouter(
         <Route path="/profile" element={<Profile />} />
 
       </Route>
+
       {/* Admin Routes */}
       <Route path="/admin" element={<AdminRoutes />} >
         <Route path="user-list" element={<UserList />} />
@@ -41,8 +42,8 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
+
     <RouterProvider router={router} />
 
   </Provider>
-
 )
