@@ -3,7 +3,8 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 
 const createCategory = asyncHandler(async (req, res) => {
   try {
-    const { name } = req.body;
+    let { name } = req.body;
+    name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 
     if (!name) {
       return res.json({ error: "Name is required" });
@@ -25,7 +26,9 @@ const createCategory = asyncHandler(async (req, res) => {
 
 const updateCategory = asyncHandler(async (req, res) => {
   try {
-    const { name } = req.body;
+    let { name } = req.body;
+    console.log(req.body, req.params);
+    name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
     const { categoryId } = req.params;
 
     const category = await Category.findOne({ _id: categoryId });
