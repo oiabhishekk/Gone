@@ -27,6 +27,7 @@ const isAuthenticated = async (req, res, next) => {
   }
 };
 const isAdmin = async (req, res, next) => {
+  
   const token = req.cookies.jwt;
 
   if (!token) {
