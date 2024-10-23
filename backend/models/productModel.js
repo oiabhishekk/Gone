@@ -62,7 +62,7 @@ const productSchema = new mongoose.Schema(
       min: 0,
     },
     reviews: [reviewSchema],
-    numRating: { type: Number, required: true, default: 0 },
+    rating: { type: Number, required: true, default: 0 ,max:5 , min:0 },
     numReviews: { type: Number, required: true, default: 0 },
     coutnInStock: { type: Number, required: true, default: 0 },
   },
