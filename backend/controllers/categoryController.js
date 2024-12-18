@@ -27,7 +27,6 @@ const createCategory = asyncHandler(async (req, res) => {
 const updateCategory = asyncHandler(async (req, res) => {
   try {
     let { name } = req.body;
-    console.log(req.body, req.params);
     name = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
     const { categoryId } = req.params;
 
@@ -70,7 +69,6 @@ const removeCategory = asyncHandler(async (req, res) => {
 const listCategory = asyncHandler(async (req, res) => {
   try {
     const all = await Category.find({});
-    console.log(all);
     res.json(all);
   } catch (error) {
     console.log(error);

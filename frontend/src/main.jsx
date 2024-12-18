@@ -9,6 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Provider } from 'react-redux';
+
 import store from './redux/store.js';
 import Login from './pages/Auth/Login.jsx';
 import Register from './pages/Auth/Register.jsx';
@@ -17,6 +18,8 @@ import Profile from './pages/User/Profile.jsx';
 import AdminRoutes from './pages/Admin/AdminRoutes.jsx';
 import UserList from './pages/Admin/UserList.jsx';
 import CategoryList from './pages/Admin/CategoryList.jsx';
+import ProductsList from './pages/Admin/ProductsList.jsx';
+import ProductUpdate from './pages/Admin/ProductUpdate.jsx';
 
 
 
@@ -35,6 +38,8 @@ const router = createBrowserRouter(
       <Route path="/admin" element={<AdminRoutes />} >
         <Route path="user-list" element={<UserList />} />
         <Route path="categorylist" element={<CategoryList />} />
+        <Route path="productlist" element={<ProductsList />} />
+        <Route path="product/update/:_id" element={<ProductUpdate />} />
 
 
       </Route>

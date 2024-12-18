@@ -6,7 +6,6 @@ const AdminRoutes = () => {
 
 
   const { userInfo } = useSelector((state) => state.auth);
-  console.log(userInfo)
   return (
     userInfo && userInfo.isAdmin ? <Outlet /> : <Navigate to="/login" replace />
   )
