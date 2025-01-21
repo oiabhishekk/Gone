@@ -4,6 +4,7 @@ import { useGetCategoriesQuery } from "../../redux/api/categoryApiSlice"
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { data } from 'autoprefixer';
+import AdminMenu from './AdminMenu';
 
 const ProductsList = () => {
   const [image, setImage] = useState("");
@@ -42,7 +43,7 @@ const ProductsList = () => {
       if (data.error) {
         toast.error("Product create failed. Try Again.");
       } else {
-        toast.success(`${data.name} is created`);
+        toast.success(`Product is created`);
         navigate("/");
       }
     } catch (error) {
@@ -69,6 +70,7 @@ const ProductsList = () => {
   return (
     <div className="container xl:mx-[9rem] sm:mx-[0]">
       <div className="flex flex-col md:flex-row">
+        <AdminMenu/>
         <div className="md:w-3/4 p-3">
           <div className="h-12">Create Product</div>
 
